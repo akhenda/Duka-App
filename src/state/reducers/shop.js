@@ -2,6 +2,7 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
 import {
+  ADD_TO_CART,
   CLEAR_PRODUCTS,
   FETCH_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_FAILURE,
@@ -13,6 +14,7 @@ const INITIAL_STATE = {
   error: {},
   products: {},
   totalPages: 1,
+  cartTotal: 0,
   selectedProduct: null,
 };
 
@@ -35,9 +37,14 @@ const authReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         error: {},
-        products: [],
-        totalPages: 1,
+        cartTotal: 0,
         selectedProduct: null,
+      };
+    case ADD_TO_CART:
+      return {
+        ...state,
+        error: {},
+        cartTotal: state.cartTotal + action.payload,
       };
     default:
       return state;

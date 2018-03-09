@@ -26,7 +26,7 @@ class App extends Component {
           onBeforeLift={this.onBeforeLift}
           persistor={persistor}>
           <View style={styles.mainContainer}>
-            <StatusBar translucent barStyle="light-content" backgroundColor={colors.statusBarTranslucent} />
+            <StatusBar barStyle="light-content" backgroundColor={colors.primary.main} />
             <RootContainer />
           </View>
         </PersistGate>

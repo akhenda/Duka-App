@@ -4,7 +4,7 @@ import { colors, metrics } from 'src/theme';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.primary.text,
+    backgroundColor: colors.secondary.text,
   },
   contentContainer: {},
   banner: {
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
     fontWeight: '800',
     textAlign: 'right',
-    color: colors.primary.text,
+    color: colors.secondary.text,
     backgroundColor: 'transparent',
   },
   profileButton: {
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderRadius: 40,
     resizeMode: 'cover',
-    borderColor: colors.primary.text,
+    borderColor: colors.secondary.text,
   },
   menuItems: {
     marginTop: 20,

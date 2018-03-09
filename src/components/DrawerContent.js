@@ -42,7 +42,7 @@ class DrawerContent extends Component {
             <Text style={styles.profileButtonText}>Profile</Text>
           </Button>
         </View>
-        <Image source={{ uri: user.avatar_urls['96'] }} style={styles.avatar} />
+        <Image source={{ uri: 'https://placeimg.com/96/96/people' }} style={styles.avatar} />
         <View style={styles.menuItems}>
           {this.renderMenuItem('home', Actions.home, 'Home', 'blue')}
           {this.renderMenuItem('settings', Actions.home, 'Settings', 'black', styles.lastMenuItem)}

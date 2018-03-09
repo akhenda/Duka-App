@@ -12,11 +12,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    backgroundColor: colors.secondary.main,
+    backgroundColor: colors.primary.lighter,
   },
   headerTitle: {
-    color: colors.primary.text,
+    color: colors.secondary.text,
   },
+  titleStyle: {
+    color: 'white',
+  },
+  homeNavBar: {},
 });
 
 export default styles;

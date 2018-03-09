@@ -19,6 +19,7 @@ export const REMOVE_FAVOURITE = 'REMOVE_FAVOURITE';
 export const APP_FIELD_CHANGED = 'APP_FIELD_CHANGED';
 
 /* ------------- Products Types ------------- */
+export const ADD_TO_CART = 'ADD_TO_CART';
 export const CLEAR_PRODUCTS = 'CLEAR_PRODUCTS';
 export const FETCH_PRODUCT_SUCCESS = 'FETCH_PRODUCT_SUCCESS';
 export const FETCH_PRODUCT_FAILURE = 'FETCH_PRODUCT_FAILURE';

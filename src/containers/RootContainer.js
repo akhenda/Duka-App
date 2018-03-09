@@ -34,7 +34,7 @@ class RootContainer extends Component {
 
     return (
       <View style={styles.container}>
-        <StatusBar translucent backgroundColor={colors.statusBarTranslucent} />
+        <StatusBar backgroundColor={colors.primary.main} />
         <Router>
           <Scene key="root" navigationBarStyle={styles.header} >
             <Scene
@@ -56,7 +56,13 @@ class RootContainer extends Component {
               initial={authenticated}
               contentComponent={DrawerContent}
             >
-              <Scene key="home" hideNavBar title="Home" component={HomeScreen} />
+              <Scene
+                key="home"
+                title="Duka"
+                component={HomeScreen}
+                titleStyle={styles.titleStyle}
+                leftButtonTintColor={colors.loadingBackground}
+              />
             </Drawer>
           </Scene>
         </Router>

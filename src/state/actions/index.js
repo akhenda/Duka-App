@@ -1,3 +1,3 @@
 export * from './app';
 export * from './auth';
-export * from './products';
+export * from './shop';
