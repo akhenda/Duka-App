@@ -1,0 +1,177 @@
+{
+  "name": "Duka",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "gc": "git add . && git-cz",
+    "test": "jest --verbose",
+    "lint": "eslint src/**/*.js",
+    "test:watch": "jest --watch",
+    "updateSnapshot": "jest --updateSnapshot",
+    "coverage": "jest --coverage && open coverage/lcov-report/index.html || xdg-open coverage/lcov-report/index.html",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start:rc": "npm start -- --reset-cache",
+    "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache verify",
+    "clean:start": "npm run clean && npm run start:rc",
+    "clean:android": "npm run clean && cd android/ && ./gradlew clean && cd .. && react-native run-android",
+    "fresh-install": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build/ModuleCache/* && rm -rf node_modules/ && npm cache verify && npm install",
+    "fresh-start": "npm run fresh-install && npm run start:rc",
+    "android:build": "cd android && ./gradlew assembleRelease",
+    "android:install": "cd android && ./gradlew assembleRelease && ./gradlew installRelease",
+    "android:devices": "$ANDROID_HOME/platform-tools/adb devices",
+    "android:logcat": "$ANDROID_HOME/platform-tools/adb logcat *:S ReactNative:V ReactNativeJS:V",
+    "validate": "npm-run-all --parallel test lint",
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "precommit": "npm run validate",
+    "prepush": "npm run validate",
+    "e2e:ios": "detox build --configuration ios.sim.debug && detox test --configuration ios.sim.debug",
+    "e2e:android": "detox build --configuration android.emu.debug && detox test --configuration android.emu.debug -l verbose",
+    "test:ios": "npm-run-all --parallel validate e2e:ios",
+    "test:android": "npm-run-all --parallel validate e2e:android",
+    "preversion": "./bin/pre-version.sh",
+    "version": "./bin/version-ios.sh",
+    "postversion": "./bin/post-version.sh",
+    "prepare": "patch-package --ignore-whitespace"
+  },
+  "engines": {
+    "node": ">=8.1.4"
+  },
+  "dependencies": {
+    "apisauce": "^0.14.3",
+    "native-base": "^2.3.7",
+    "prop-types": "^15.6.0",
+    "react": "16.2.0",
+    "react-native": "0.52.1",
+    "react-native-animatable": "^1.2.4",
+    "react-native-config": "^0.11.5",
+    "react-native-router-flux": "^4.0.0-beta.28",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "react-native-offline-mode": "^0.1.5",
+    "react-native-onboarding-swiper": "^0.3.1",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^5.5.0",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^6.0.2",
+    "@commitlint/config-conventional": "^6.0.2",
+    "@semantic-release/changelog": "^1.0.0",
+    "@semantic-release/exec": "^1.0.2",
+    "@semantic-release/git": "^2.0.3",
+    "babel-eslint": "^8.2.1",
+    "babel-jest": "22.1.0",
+    "babel-plugin-module-resolver": "^3.0.0",
+    "babel-preset-react-native": "4.0.0",
+    "commitizen": "^2.9.6",
+    "cz-customizable": "^5.2.0",
+    "detox": "^7.0.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-import-resolver-babel-module": "^4.0.0",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.6.1",
+    "eslint-plugin-react-native": "^3.2.1",
+    "husky": "^0.14.3",
+    "inquirer": "^5.0.1",
+    "jest": "22.1.4",
+    "npm-run-all": "^4.1.2",
+    "patch-package": "^5.0.0",
+    "react-dom": "16.2.0",
+    "react-test-renderer": "16.2.0",
+    "reactotron-react-native": "^1.14.0",
+    "reactotron-redux": "^1.13.0",
+    "redux-mock-store": "^1.5.1",
+    "shelljs": "^0.8.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": ".cz-config.js"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "release": {
+    "branch": "develop",
+    "verifyConditions": [
+      "@semantic-release/changelog",
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ],
+    "getLastRelease": "@semantic-release/git",
+    "publish": [
+      {
+        "path": "@semantic-release/changelog",
+        "changelogFile": "docs/CHANGELOG.md"
+      },
+      {
+        "path": "@semantic-release/npm",
+        "npmPublish": false
+      },
+      {
+        "path": "@semantic-release/exec",
+        "cmd": "bin/version-ios.sh"
+      },
+      {
+        "path": "@semantic-release/git",
+        "assets": [
+          "package.json",
+          "ios/Duka",
+          "docs"
+        ],
+        "message": "chore(release): v${nextRelease.version} - <%= new Date().toLocaleDateString('en-US', {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric'}) %> [skip ci]\n\n${nextRelease.notes}"
+      },
+      "@semantic-release/github"
+    ]
+  },
+  "jest": {
+    "collectCoverage": true,
+    "preset": "react-native",
+    "testRegex": "/__tests__/unit/.*\\.spec\\.js$",
+    "setupTestFrameworkScriptFile": "./__tests__/unit/setup.js",
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|native-base|react-navigation|mobx-react)"
+    ]
+  },
+  "detox": {
+    "test-runner": "jest",
+    "specs": "__tests__/e2e/src",
+    "runner-config": "__tests__/e2e/config.json",
+    "configurations": {
+      "android.emu.debug": {
+        "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+        "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
+        "type": "android.emulator",
+        "name": "Nexus_5X_API_25"
+      },
+      "android.emu.release": {
+        "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
+        "build": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd ..",
+        "type": "android.emulator",
+        "name": "Nexus_5X_API_25"
+      },
+      "ios.sim.release": {
+        "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/AlphaRN.app",
+        "build": "export RCT_NO_LAUNCH_PACKAGER=true && xcodebuild -project ios/AlphaRN.xcodeproj -scheme AlphaRN -configuration Release -sdk iphonesimulator -derivedDataPath ios/build -quiet",
+        "type": "ios.simulator",
+        "name": "iPhone 7 Plus"
+      },
+      "ios.sim.debug": {
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/AlphaRN.app",
+        "build": "xcodebuild -project ios/AlphaRN.xcodeproj -scheme AlphaRN -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "name": "iPhone 7 Plus"
+      }
+    }
+  }
+}
