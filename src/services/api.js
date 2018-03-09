@@ -3,7 +3,7 @@ import apisauce from 'apisauce';
 import Config from 'react-native-config';
 
 // our "constructor"
-const create = (baseURL = 'https://example.com/') => {
+const create = (baseURL = 'https://duka.herokuapp.com/api/v1/') => {
   // ------
   // STEP 1
   // ------
@@ -59,6 +59,10 @@ const create = (baseURL = 'https://example.com/') => {
     );
   };
   const getUser = context => api.get(`/users/me?context=${context}`);
+  
+
+  const getProducts = (page, limit) => api.get(`/products?page=${page}&limit=${limit}`);
+  const getProduct = id => api.get(`/products/${id}`);
 
   // ------
   // STEP 3
@@ -79,6 +83,8 @@ const create = (baseURL = 'https://example.com/') => {
     loginUser,
     validateToken,
     getUser,
+    getProducts,
+    getProduct,
   };
 };
 

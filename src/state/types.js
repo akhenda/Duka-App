@@ -18,4 +18,11 @@ export const UPDATE_LOCATION = 'UPDATE_LOCATION';
 export const REMOVE_FAVOURITE = 'REMOVE_FAVOURITE';
 export const APP_FIELD_CHANGED = 'APP_FIELD_CHANGED';
 
+/* ------------- Products Types ------------- */
+export const CLEAR_PRODUCTS = 'CLEAR_PRODUCTS';
+export const FETCH_PRODUCT_SUCCESS = 'FETCH_PRODUCT_SUCCESS';
+export const FETCH_PRODUCT_FAILURE = 'FETCH_PRODUCT_FAILURE';
+export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
+export const FETCH_PRODUCTS_FAILURE = 'FETCH_PRODUCTS_FAILURE';
+
 /* ------------- Other Types ------------- */
