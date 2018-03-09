@@ -65,7 +65,7 @@ class HomeScreen extends Component {
   }
 
   handleLoadMore() {
-    if (this.state.page < this.state.totalPages) {
+    if (this.state.page < this.state.totalPages + 1) {
       this.setState((prevState) => {
         return { loading: true, page: prevState.page + 1 };
       }, () => {
@@ -85,6 +85,7 @@ class HomeScreen extends Component {
 
   render() {
     const emptyHeight = '100%';
+    const { cartTotal } = this.props;
     const { loading, refreshing, products } = this.state;
     const empty = products.length > 0;
 
@@ -120,10 +121,11 @@ class HomeScreen extends Component {
             <Icon name="cart" style={styles.cartIcon} />
             <View style={styles.cartText}>
               <Text style={styles.cartTextTitle}>Total:</Text>
-              <Text style={styles.cartTextAmount}>Ksh {this.props.cartTotal}</Text>
+              <Text style={styles.cartTextAmount}>Ksh {cartTotal}</Text>
             </View>
             <Button
-              danger
+              success
+              bordered
               style={styles.cartClear}
               onPress={() => this.props.clearProducts()}
             >

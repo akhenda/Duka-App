@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { colors, metrics } from 'src/theme';
 
@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    // marginTop: Platform.OS === 'ios' ? 65 : 80,
   },
   emptyContainer: {
     alignItems: 'center',
@@ -30,9 +29,23 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: colors.secondary.main,
   },
+  cartQuantity: {
+    position: 'absolute',
+    top: 10,
+    left: 30,
+    padding: 4,
+    borderRadius: 50,
+    backgroundColor: colors.secondary.text,
+  },
+  cartQuantityText: {
+    fontSize: 14,
+    fontWeight: '800',
+    color: colors.secondary.dark,
+    backgroundColor: colors.secondary.text,
+  },
   cartIcon: {
-    fontSize: 35,
-    color: colors.primary.light,
+    fontSize: 40,
+    color: colors.primary.lighter,
   },
   cartText: {
     alignItems: 'center',
